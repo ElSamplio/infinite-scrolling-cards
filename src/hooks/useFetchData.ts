@@ -8,6 +8,7 @@ const useFetchData = (page: number, limit: number) => {
   const [error, setError] = useState<string>();
 
   useEffect(() => {
+    setLoading(true);
     axios
       .get("https://my-amiibo-api.onrender.com", {
         params: { page, limit },

@@ -1,14 +1,12 @@
 import React from "react";
-import { StatusBar } from "expo-status-bar";
 import {
   ActivityIndicator,
   FlatList,
-  StyleSheet,
-  Text,
   View,
 } from "react-native";
 import { Amiibo } from "../types/amiibo";
 import Card from "../components/Card";
+import Error from "./Error";
 
 interface Props {
   loading: boolean;
@@ -25,7 +23,7 @@ const Feed: React.FC<Props> = ({ loading, data, error, onEndReached }) => {
 
   return (
     <View>
-      {error && <Text>{error}</Text>}
+      {error && <Error error={error} />}
       <FlatList
         data={data}
         renderItem={({ item }) => (
@@ -35,7 +33,7 @@ const Feed: React.FC<Props> = ({ loading, data, error, onEndReached }) => {
             image={item.image}
           />
         )}
-        keyExtractor={(item) => item.head}
+        keyExtractor={(item) => `${item.id}`}
         onEndReached={onEndReached}
         onEndReachedThreshold={0.5}
         ListFooterComponent={renderFooter}

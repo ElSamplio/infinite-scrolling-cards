@@ -1,7 +1,8 @@
 export type Amiibo = {
-  amiiboSeries: string,
-  name: string,
-  gameSeries: string,
-  image: string,
-  head: string,
+  id: number;
+  amiiboSeries: string;
+  name: string;
+  gameSeries: string;
+  image: string;
+  head: string;
 };
