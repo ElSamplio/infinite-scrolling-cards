@@ -11,21 +11,17 @@ Simple infitite scroll view made in React Native, showing cards with image and t
 
 ### Trade-offs / decisions
 
-I made the project using Expo, due to the fact that it should be done quick and no complex device functionalities should be implemented. Also the Typescript usage was important to me since, despite it could take some more time, it avoids many mistakes and improves the sense of the code.
+I made the project using Expo, due to the fact that it should be done quick and no complex device functionalities should be implemented. <br/>Also the Typescript usage was important to me since, despite it could take some more time, it avoids many mistakes and improves the sense of the code. <br/>I used ```React.memo``` in the components that didn't handle any internal state in order to cache them and optimize the application. <br/>Finally, I implemented a couple of improvements for the endReached handling:<br/>
+- Implemented debounce from ```lodash``` library to optimize the API calls
+- Implemented a control to see if there were enough records to trigger the API call again since, for example, when there is an error and no records are returned, the endReached was triggered many times.
 
 ### Potential future optimizations and improvements
 
 - **Error handling:** Since it doens't make any sense show error codes or logs to the user, we could handle them in the ```Error``` component to send it to a monitoring tool or catch the log at conveinence.
 
-- **Caching:** Improve the performance using ```React.memo```; not done by lack of time and enough experience.
-
-- **Optimizations:** I checked out and for images optimization we could use libraries like ```react-native-fast-image``` and also debounce the scroll event with ```lodash```, however, I could not do it because of time constraints too.
+- **Image Optimizations:** Image load could be optimized in the future using the  ```react-native-fast-image``` library to cache them once they are loaded.
 
 ### Learnings:
 
 I learned about the new Expo CLI whose main advantage is to run over the specific project, so there is no matter about, i.e., the environment NodeJS Version or SDK.
 
-### Missing tasks
-
-I could not complete the optimiezations. Also there is a bug since from the first load, the image width is different for subsequent loads. I know I can fix this using the right Dimensions in styling.
-Unfortunately, I ran out of time to do these tasks, anyway, I really appreciate the time you take reviewing this assessment.

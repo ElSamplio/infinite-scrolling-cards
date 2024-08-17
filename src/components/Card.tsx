@@ -1,5 +1,12 @@
 import React from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  Dimensions,
+  PixelRatio,
+} from "react-native";
 
 interface Props {
   image: string;
@@ -15,6 +22,7 @@ const Card: React.FC<Props> = ({ image, title, description }) => (
   </View>
 );
 
+const { width } = Dimensions.get("screen");
 const styles = StyleSheet.create({
   card: {
     margin: 10,
@@ -27,19 +35,19 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
   },
   image: {
-    width: "100%",
+    width: width * 0.8,
     height: 150,
     borderRadius: 10,
   },
   title: {
-    fontSize: 18,
+    fontSize: PixelRatio.getFontScale() * 16,
     fontWeight: "bold",
     marginVertical: 5,
   },
   description: {
-    fontSize: 14,
+    fontSize: PixelRatio.getFontScale() * 14,
     color: "#666",
   },
 });
 
-export default Card;
+export default React.memo(Card);

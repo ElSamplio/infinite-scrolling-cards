@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useCallback } from "react";
+import { useEffect, useState } from "react";
 import { StyleSheet, View, Dimensions } from "react-native";
 import useFetchData from "./src/hooks/useFetchData";
 import Feed from "./src/screens/Feed";
 import { Amiibo } from "./src/types/amiibo";
+import { debounce } from "lodash";
 
 const App: React.FC = () => {
   const [page, setPage] = useState<number>(1);
@@ -17,8 +19,16 @@ const App: React.FC = () => {
   }, [amiiboData]);
 
   const handleEndReached = () => {
-    setPage(page + 1);
+    // Controlling when there are enough records on screen to call API again
+    if ((LIMIT < 5 && allAmiibos.length > 0) || allAmiibos.length > 0) {
+      setPage(page + 1);
+    }
   };
+
+  const debouncedHandleEndReached = useCallback(
+    debounce(handleEndReached,100),
+    [allAmiibos]
+  );
 
   return (
     <View style={styles.container}>
@@ -26,7 +36,7 @@ const App: React.FC = () => {
         data={allAmiibos}
         loading={loading}
         error={error}
-        onEndReached={handleEndReached}
+        onEndReached={debouncedHandleEndReached}
       />
     </View>
   );

@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
+import { useEffect } from "react";
 import { View, Text, StyleSheet, PixelRatio, Dimensions } from "react-native";
 
 interface Props {
@@ -32,4 +33,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Error;
+export default React.memo(Error);

@@ -42,4 +42,4 @@ const Feed: React.FC<Props> = ({ loading, data, error, onEndReached }) => {
   );
 };
 
-export default Feed;
+export default React.memo(Feed);
